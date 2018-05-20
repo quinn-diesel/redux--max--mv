@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import CounterControl from '../../components/CounterControl/CounterControl';
 import CounterOutput from '../../components/CounterOutput/CounterOutput';
@@ -28,7 +29,7 @@ class Counter extends Component {
     render () {
         return (
             <div>
-                <CounterOutput value={this.state.counter} />
+                <CounterOutput value={this.props.ctrState} />
                 <CounterControl label="Increment" clicked={() => this.counterChangedHandler( 'inc' )} />
                 <CounterControl label="Decrement" clicked={() => this.counterChangedHandler( 'dec' )}  />
                 <CounterControl label="Add 5" clicked={() => this.counterChangedHandler( 'add', 5 )}  />
@@ -38,4 +39,14 @@ class Counter extends Component {
     }
 }
 
-export default Counter;
+// for the state we want to get (after the component class)
+// state will be given by react/redux
+
+const mapStateToProps = state => {
+    return {
+        ctrState: state.counter
+    };
+}
+
+// connect is a higher order function which returns a function 
+export default connect(mapStateToProps)(Counter);
