@@ -1,3 +1,5 @@
+import { strictEqual } from "assert";
+
 const initialState = {
     counter: 0,
     results: []
@@ -41,6 +43,19 @@ const reducer = (state = initialState, action ) => {
             return {
                 ...state,
                 results: state.results.concat({id: new Date(), value: state.counter})
+            }
+        case 'DELETE_RESULT':
+            const id = 2;
+            // copy of a new array
+            // const newArray = [...state.results];
+            // splice out
+            // newArray.splice(id, 1);
+
+            //  below is a filter taking a function with a payload being passed in the updated Array
+            const updatedArray = state.results.filter((result) => result.id !== action.resultElId );
+            return {
+                ...state,
+                results: updatedArray
             }
     }
 
