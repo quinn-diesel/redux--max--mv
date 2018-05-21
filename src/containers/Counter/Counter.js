@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 
 import CounterControl from '../../components/CounterControl/CounterControl';
 import CounterOutput from '../../components/CounterOutput/CounterOutput';
+import * as actionTpyes from '../../store/actions';
+
 
 class Counter extends Component {
     // state = {
@@ -51,8 +53,8 @@ class Counter extends Component {
 
 const mapStateToProps = state => {
     return {
-        ctrState: state.counter,
-        storedResults: state.results
+        ctrState: state.ctr.counter,
+        storedResults: state.res.results
     };
 }
 
@@ -65,12 +67,12 @@ const mapDispatchToProps = dispatch => {
     // have to have the type which is always in caps
     // --- ACTION ----- //
     return {
-        onIncrementCounter: () => dispatch({type: 'INCREMENT'}),
-        onDecrementCounter: () => dispatch({type: 'DECREMENT'}),
-        onAddCounter: () => dispatch({type: 'ADD', val: 10}),
-        onSubtractCounter: () => dispatch({type: 'SUBTRACT', val: 15}),
-        onStoreResult: () => dispatch({type: 'STORE_RESULT'}),
-        onDeleteResult: (id) => dispatch({type: 'DELETE_RESULT', resultElId}),
+        onIncrementCounter: () => dispatch({type: actionTypes.INCREMENT}),
+        onDecrementCounter: () => dispatch({type: actionTypes.DECREMENT}),
+        onAddCounter: () => dispatch({type: actionTypes.ADD, val: 10}),
+        onSubtractCounter: () => dispatch({type: actionTypes.SUBSTRACT, val: 15}),
+        onStoreResult: (result) => dispatch({type: actionTypes.STORE_RESULTS, result: result}),
+        onDeleteResult: (id) => dispatch({type: actionTYPES.DELETE_RESULTS, resultElId}),
         // onAddCounter
     };
 };
